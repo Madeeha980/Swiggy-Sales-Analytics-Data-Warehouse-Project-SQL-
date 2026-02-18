@@ -1,89 +1,164 @@
-# Swiggy Sales Analytics & Data Warehouse Project (SQL)
+**Swiggy Sales Analytics & Data Warehouse Project (SQL)**
+**Overview**
 
-## Overview
+This project builds a complete SQL-based Data Warehouse solution using a Swiggy-style food delivery dataset.
 
-This project focuses on analyzing Swiggy-style food delivery data using **SQL** to derive meaningful business insights. The goal is to simulate a real-world analytics workflow where raw transactional data is cleaned, structured, and transformed into a **data warehouse** that supports efficient reporting and decision-making.
+The workflow includes:
 
-The project is designed from a **data analyst perspective**, emphasizing data modeling, query optimization, and KPI-driven analysis rather than just writing basic SQL queries.
+Raw data validation and cleaning
 
----
+Duplicate detection and removal
 
-## Objectives
+Star schema design
 
-* Clean and prepare raw order data for analysis
-* Design a structured **data warehouse (star schema)**
-* Analyze sales, customer behavior, restaurants, and locations
-* Generate insights that can help business stakeholders make informed decisions
+Dimension & fact table creation
 
----
+ETL process implementation
 
-## Dataset Description
+KPI generation and advanced business analytics
 
-The dataset represents food delivery transactions similar to Swiggy and includes information such as:
+The project simulates a real-world data analyst + data warehousing scenario using SQL Server.
 
-* Customer details
-* Restaurant details
-* City and location data
-* Order dates and times
-* Order value, quantity, and ratings
+**Database & Raw Data**
 
-The raw data is first validated and cleaned to handle missing values, duplicates, and inconsistencies.
+Database used: swiggy_db
+Raw table: swiggy_data
 
----
+Initial steps performed:
 
-## Data Modeling
+Row count validation
 
-A **star schema** is implemented to support analytical queries:
+Null value checks (state, city, order_date, restaurant, price, rating, etc.)
 
-### Fact Table
+Blank string detection
 
-* **Fact_Orders**: Stores transactional data such as order amount, quantity, rating, and order date
+Duplicate detection using GROUP BY + HAVING
 
-### Dimension Tables
+Duplicate removal using ROW_NUMBER() window function
 
-* **Dim_Customers**: Customer-related attributes
-* **Dim_Restaurants**: Restaurant and cuisine details
-* **Dim_Location**: City and area information
-* **Dim_Date**: Date, month, quarter, and year attributes
+This ensures clean and reliable data before warehouse modeling.
 
-This structure improves query performance and makes the analysis scalable.
+**Data Warehouse Design (Star Schema)**
+Fact Table
 
----
+fact_swiggy_orders
 
-## Key Analysis & KPIs
+price_inr
 
-* Total and monthly sales revenue
-* Top-performing cities and restaurants
-* Customer spending patterns
-* Popular cuisines and order frequency
-* Rating distribution and service quality trends
+rating
 
-All insights are generated using **SQL queries** with joins, aggregations, subqueries, and window functions.
+rating_count
 
----
+Foreign keys to all dimensions
 
-## Skills & Concepts Used
+Dimension Tables
 
-* SQL (SELECT, JOINs, GROUP BY, HAVING)
-* Subqueries and Common Table Expressions (CTEs)
-* Window functions
-* Data cleaning and validation
-* Star schema & data warehousing concepts
-* Business-oriented data analysis
+dim_date (year, month, quarter, week)
 
----
+dim_location (state, city, area)
 
-## Business Value
+dim_restaurant
 
-This project demonstrates how raw transactional data can be converted into actionable insights. The analysis helps answer practical business questions such as:
+dim_category
 
-* Which locations generate the highest revenue?
-* Which restaurants and cuisines perform best?
-* How does customer behavior change over time?
+dim_dish
 
-These insights can support marketing strategies, operational improvements, and revenue growth.
+The star schema improves query performance and supports scalable analytical reporting.
 
----
+**ETL Process**
+
+Loaded distinct values into dimension tables
+
+Generated surrogate keys using IDENTITY
+
+Inserted data into fact table using joins between raw data and dimensions
+
+Verified warehouse using full join query across all dimensions
+**
+Key KPIs**
+
+Total Orders
+
+Total Revenue (INR Million)
+
+Average Dish Price
+
+Average Rating
+**
+Business Analytics Performed**
+Time-Based Analysis
+
+**Monthly Orders & Revenue Trends
+**
+Quarterly & Yearly Trends
+
+Day-of-Week Order Analysis
+
+Running Total Revenue (Window Function)
+
+**Location Analysis**
+
+Top Cities by Revenue
+
+Revenue Contribution by State
+
+Price Sensitivity by City
+
+**Restaurant & Food Performance
+**
+Top Restaurants by Revenue
+
+Top Categories & Most Ordered Dishes
+
+Category-wise Orders + Average Rating
+
+Revenue Contribution % by Category
+
+**Customer Spending Analysis**
+
+Price range segmentation (Under 100, 100–199, etc.)
+
+**Advanced SQL Analytics**
+
+Top Restaurants per City using DENSE_RANK()
+
+High Revenue but Low Rating Restaurants
+
+Restaurants with No Rating Below 4 (NOT EXISTS)
+
+Restaurants with 3 Consecutive Months Revenue Decline using LAG()
+
+**SQL Concepts Demonstrated**
+
+Data Cleaning & Validation
+
+CTEs (Common Table Expressions)
+
+Window Functions (ROW_NUMBER, DENSE_RANK, LAG)
+
+Subqueries
+
+Aggregations & Grouping
+
+Revenue Contribution % Calculation
+
+Trend Detection Logic
+
+Star Schema & Data Warehousing Principles
+
+**Business Value**
+
+This project demonstrates how raw transactional data can be transformed into a structured warehouse that enables:
+
+Revenue trend monitoring
+
+Performance benchmarking
+
+Risk detection (declining revenue restaurants)
+
+Customer behavior insights
+
+Location-based strategic analysis
 
 ## Conclusion
 
