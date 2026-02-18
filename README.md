@@ -1,47 +1,34 @@
-**Swiggy Sales Analytics & Data Warehouse Project (SQL)**
-**Overview**
+Swiggy Sales Analytics & Data Warehouse Project (SQL)
+Overview
 
-This project builds a complete SQL-based Data Warehouse solution using a Swiggy-style food delivery dataset.
+This project builds a complete SQL-based Data Warehouse solution using a Swiggy-style food delivery dataset. It simulates a real-world Data Analyst and Data Warehousing workflow, covering data cleaning, dimensional modeling, ETL implementation, KPI generation, and advanced business analytics.
 
-The workflow includes:
+Database and Raw Data
 
-Raw data validation and cleaning
+Database: swiggy_db
 
-Duplicate detection and removal
+Raw Table: swiggy_data
 
-Star schema design
+Data Validation and Cleaning
 
-Dimension & fact table creation
+Row count verification
 
-ETL process implementation
-
-KPI generation and advanced business analytics
-
-The project simulates a real-world data analyst + data warehousing scenario using SQL Server.
-
-**Database & Raw Data**
-
-Database used: swiggy_db
-Raw table: swiggy_data
-
-Initial steps performed:
-
-Row count validation
-
-Null value checks (state, city, order_date, restaurant, price, rating, etc.)
+Null value checks (state, city, order_date, restaurant_name, price, rating)
 
 Blank string detection
 
-Duplicate detection using GROUP BY + HAVING
+Duplicate detection using GROUP BY and HAVING
 
 Duplicate removal using ROW_NUMBER() window function
 
-This ensures clean and reliable data before warehouse modeling.
+These steps ensured clean and reliable data before warehouse modeling.
 
-**Data Warehouse Design (Star Schema)**
+Data Warehouse Design (Star Schema)
 Fact Table
 
 fact_swiggy_orders
+
+Includes:
 
 price_inr
 
@@ -49,7 +36,7 @@ rating
 
 rating_count
 
-Foreign keys to all dimensions
+Foreign keys to all dimension tables
 
 Dimension Tables
 
@@ -63,19 +50,19 @@ dim_category
 
 dim_dish
 
-The star schema improves query performance and supports scalable analytical reporting.
+The Star Schema structure improves query performance and supports scalable analytics.
 
-**ETL Process**
+ETL Process
 
 Loaded distinct values into dimension tables
 
 Generated surrogate keys using IDENTITY
 
-Inserted data into fact table using joins between raw data and dimensions
+Inserted data into fact table using joins
 
-Verified warehouse using full join query across all dimensions
-**
-Key KPIs**
+Verified warehouse with multi-table join validation
+
+Key Performance Indicators (KPIs)
 
 Total Orders
 
@@ -84,69 +71,67 @@ Total Revenue (INR Million)
 Average Dish Price
 
 Average Rating
-**
-Business Analytics Performed**
+
+Business Analytics Performed
 Time-Based Analysis
 
-**Monthly Orders & Revenue Trends
-**
-Quarterly & Yearly Trends
+Monthly orders and revenue trends
 
-Day-of-Week Order Analysis
+Quarterly and yearly trends
 
-Running Total Revenue (Window Function)
+Day-of-week analysis
 
-**Location Analysis**
+Running total revenue using window functions
 
-Top Cities by Revenue
+Location-Based Analysis
 
-Revenue Contribution by State
+Top cities by revenue
 
-Price Sensitivity by City
+Revenue contribution by state
 
-**Restaurant & Food Performance
-**
-Top Restaurants by Revenue
+Price sensitivity analysis by city
 
-Top Categories & Most Ordered Dishes
+Restaurant and Food Performance
 
-Category-wise Orders + Average Rating
+Top restaurants by revenue
 
-Revenue Contribution % by Category
+Top categories and most ordered dishes
 
-**Customer Spending Analysis**
+Category-wise orders and average rating
 
-Price range segmentation (Under 100, 100–199, etc.)
+Revenue contribution percentage by category
 
-**Advanced SQL Analytics**
+Customer Spending Analysis
 
-Top Restaurants per City using DENSE_RANK()
+Price range segmentation (Under 100, 100–199, 200–299, etc.)
 
-High Revenue but Low Rating Restaurants
+Advanced SQL Analytics
 
-Restaurants with No Rating Below 4 (NOT EXISTS)
+Top restaurants per city using DENSE_RANK()
 
-Restaurants with 3 Consecutive Months Revenue Decline using LAG()
+High revenue but low rating restaurants
 
-**SQL Concepts Demonstrated**
+Restaurants with no rating below 4 using NOT EXISTS
 
-Data Cleaning & Validation
+Restaurants with three consecutive months of revenue decline using LAG()
 
-CTEs (Common Table Expressions)
+SQL Concepts Demonstrated
 
-Window Functions (ROW_NUMBER, DENSE_RANK, LAG)
+Data cleaning and validation
+
+Common Table Expressions (CTEs)
+
+Window functions (ROW_NUMBER, DENSE_RANK, LAG)
 
 Subqueries
 
-Aggregations & Grouping
+Aggregations and grouping
 
-Revenue Contribution % Calculation
+Trend detection logic
 
-Trend Detection Logic
+Star schema design principles
 
-Star Schema & Data Warehousing Principles
-
-**Business Value**
+Business Value
 
 This project demonstrates how raw transactional data can be transformed into a structured warehouse that enables:
 
@@ -154,12 +139,11 @@ Revenue trend monitoring
 
 Performance benchmarking
 
-Risk detection (declining revenue restaurants)
+Risk detection
 
 Customer behavior insights
 
 Location-based strategic analysis
-
 ## Conclusion
 
 This project showcases hands-on experience in **SQL-based analytics and data warehousing**, closely reflecting real industry use cases. It highlights the ability to think analytically, structure data efficiently, and translate numbers into business insights.
